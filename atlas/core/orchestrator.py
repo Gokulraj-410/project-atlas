@@ -1,5 +1,8 @@
 from atlas.discovery.finder import Finder
 from atlas.discovery.filter import FilterPipeline
+from atlas.parsers.java.parser import JavaParser
+from atlas.models.syntax_tree import SyntaxTree
+from atlas.visitor.java.visitor import JavaVisitor
 
 class AnalysisPipeline:
     def analyze(self, path: str):
@@ -16,6 +19,13 @@ class AnalysisPipeline:
 
         # Step 2: Parse files
         print("Parsing files...")
+        for each_file in java_files:
+            parser = JavaParser()
+            tree = parser.parse(each_file)
+            
+            # You can process the tree as needed, e.g., extract symbols, etc.
+        visitor = JavaVisitor(tree)
+        visitor._visit_node(tree.tree.root_node)
 
         # Step 3: Collect symbols
         print("Collecting symbols...")
