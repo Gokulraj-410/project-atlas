@@ -14,6 +14,6 @@ class Finder:
             for file in files:
                 discovered_files.append(os.path.join(root, file))
         print(f"Total files discovered: {len(discovered_files)}")        
-        print(f"Discovered files: {discovered_files}")
+        #print(f"Discovered files: {discovered_files}")
         return discovered_files   
 

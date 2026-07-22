@@ -8,7 +8,7 @@ class FilterPipeline:
             if file.endswith(extensions):
                 filtered_files.append(file)
         print(f"Total files filtered: {len(filtered_files)}")        
-        print(f"Filtered files: {filtered_files}")        
+        #print(f"Filtered files: {filtered_files}")        
         return filtered_files
      
         
