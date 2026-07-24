@@ -1,0 +1,28 @@
+{
+    "path": "C:\\Users\\muthu\\OneDrive\\Desktop\\atlas_test\\Employee.java",
+    "package": null,
+    "imports": [
+        "java.util.ArrayList",
+        "java.util.List"
+    ],
+    "classes": [
+        {
+            "name": "Employee",
+            "fields": [],
+            "constructors": [],
+            "methods": []
+        },
+        {
+            "name": "Department",
+            "fields": [],
+            "constructors": [],
+            "methods": []
+        },
+        {
+            "name": "Main",
+            "fields": [],
+            "constructors": [],
+            "methods": []
+        }
+    ]
+}

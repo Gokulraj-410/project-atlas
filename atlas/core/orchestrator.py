@@ -1,8 +1,9 @@
 from atlas.discovery.finder import Finder
 from atlas.discovery.filter import FilterPipeline
 from atlas.parsers.java.parser import JavaParser
-from atlas.models.syntax_tree import SyntaxTree
+#from atlas.models.syntax_tree import SyntaxTree
 from atlas.visitor.java.visitor import JavaVisitor
+from atlas.exporters.json_exporter import JsonExporter
 
 class AnalysisPipeline:
     def analyze(self, path: str):
@@ -21,11 +22,11 @@ class AnalysisPipeline:
         print("Parsing files...")
         for each_file in java_files:
             parser = JavaParser()
-            tree = parser.parse(each_file)
+            tree,source,path = parser.parse(each_file)
             
             # You can process the tree as needed, e.g., extract symbols, etc.
-        visitor = JavaVisitor(tree)
-        visitor._visit_node(tree.tree.root_node)
+        visitor = JavaVisitor(tree,source,path)
+        result = visitor.visit(tree.root_node)
 
         # Step 3: Collect symbols
         print("Collecting symbols...")
@@ -35,5 +36,6 @@ class AnalysisPipeline:
 
         # Step 5: Export JSON
         print("Exporting JSON...")
+        JsonExporter.export(result, "output.json")
 
         print("Analysis completed.")
