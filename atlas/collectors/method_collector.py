@@ -1,5 +1,5 @@
 class method_collector:
-    def visit_method_declaration(self,source,node):
+    def visit_method_declaration(self,current_class,source,node):
         print("inside")
 
         name_node = node.child_by_field_name("name")
@@ -14,5 +14,4 @@ class method_collector:
         "parameters": [],
         "localVariables": []
         }
-
-        self.result["methods"].append(method)
+        current_class["methods"].append(method)

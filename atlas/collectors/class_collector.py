@@ -1,4 +1,4 @@
-from atlas.collectors.method_collector import method_collector
+from atlas.collectors.method_collector import method_collector as mc
 class class_collector:
     def visit_class_declaration(self,source,node):
 
@@ -13,11 +13,13 @@ class class_collector:
         "methods": []
         }
         
-        self.result["classes"].append(cls)  
-        print(node.named_children)
-        method_collector = method_collector()
-        for child in node.named_children:
-          if child.type == "method_declaration":
-              print("inside")
-              method_collector.visit_method_declaration(self.source,child)
+        self.result["classes"].append(cls)
+        method_collector = mc()
+        body = node.child_by_field_name("body")
+        if body:
+            for child in body.named_children:
+              print(child.type)
+              if child.type == "method_declaration":
+                  print("here")
+                  method_collector.visit_method_declaration(cls,source,child)
        

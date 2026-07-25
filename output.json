@@ -10,19 +10,82 @@
             "name": "Employee",
             "fields": [],
             "constructors": [],
-            "methods": []
+            "methods": [
+                {
+                    "name": "displayInfo",
+                    "returnType": "void",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "calculateSalary",
+                    "returnType": "double",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "getEmployeeCount",
+                    "returnType": "int",
+                    "parameters": [],
+                    "localVariables": []
+                }
+            ]
         },
         {
             "name": "Department",
             "fields": [],
             "constructors": [],
-            "methods": []
+            "methods": [
+                {
+                    "name": "addEmployee",
+                    "returnType": "void",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "printEmployees",
+                    "returnType": "void",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "getSize",
+                    "returnType": "int",
+                    "parameters": [],
+                    "localVariables": []
+                }
+            ]
         },
         {
             "name": "Main",
             "fields": [],
             "constructors": [],
-            "methods": []
+            "methods": [
+                {
+                    "name": "main",
+                    "returnType": "void",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "greet",
+                    "returnType": "void",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "greet",
+                    "returnType": "void",
+                    "parameters": [],
+                    "localVariables": []
+                },
+                {
+                    "name": "add",
+                    "returnType": "int",
+                    "parameters": [],
+                    "localVariables": []
+                }
+            ]
         }
     ]
 }

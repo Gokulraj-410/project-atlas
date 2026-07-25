@@ -11,8 +11,6 @@ class JavaVisitor:
             "imports": [],
             "classes": []
         }
-        self.current_class = None
-        self.current_method = None
 
     def visit(self,root_node):
         root_node = self.tree.root_node
