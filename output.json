@@ -9,7 +9,30 @@
         {
             "name": "Employee",
             "fields": [],
-            "constructors": [],
+            "constructors": [
+                {
+                    "name": "Employee",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "String"
+                        }
+                    ]
+                },
+                {
+                    "name": "Employee",
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "String"
+                        },
+                        {
+                            "name": "age",
+                            "type": "int"
+                        }
+                    ]
+                }
+            ],
             "methods": [
                 {
                     "name": "displayInfo",
@@ -20,7 +43,12 @@
                 {
                     "name": "calculateSalary",
                     "returnType": "double",
-                    "parameters": [],
+                    "parameters": [
+                        {
+                            "name": "baseSalary",
+                            "type": "double"
+                        }
+                    ],
                     "localVariables": []
                 },
                 {
@@ -34,12 +62,27 @@
         {
             "name": "Department",
             "fields": [],
-            "constructors": [],
+            "constructors": [
+                {
+                    "name": "Department",
+                    "parameters": [
+                        {
+                            "name": "departmentName",
+                            "type": "String"
+                        }
+                    ]
+                }
+            ],
             "methods": [
                 {
                     "name": "addEmployee",
                     "returnType": "void",
-                    "parameters": [],
+                    "parameters": [
+                        {
+                            "name": "employee",
+                            "type": "Employee"
+                        }
+                    ],
                     "localVariables": []
                 },
                 {
@@ -64,7 +107,12 @@
                 {
                     "name": "main",
                     "returnType": "void",
-                    "parameters": [],
+                    "parameters": [
+                        {
+                            "name": "args",
+                            "type": "String[]"
+                        }
+                    ],
                     "localVariables": []
                 },
                 {
@@ -76,13 +124,27 @@
                 {
                     "name": "greet",
                     "returnType": "void",
-                    "parameters": [],
+                    "parameters": [
+                        {
+                            "name": "name",
+                            "type": "String"
+                        }
+                    ],
                     "localVariables": []
                 },
                 {
                     "name": "add",
                     "returnType": "int",
-                    "parameters": [],
+                    "parameters": [
+                        {
+                            "name": "a",
+                            "type": "int"
+                        },
+                        {
+                            "name": "b",
+                            "type": "int"
+                        }
+                    ],
                     "localVariables": []
                 }
             ]
