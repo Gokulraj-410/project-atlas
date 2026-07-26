@@ -8,7 +8,24 @@
     "classes": [
         {
             "name": "Employee",
-            "fields": [],
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "String"
+                },
+                {
+                    "name": "age",
+                    "type": "int"
+                },
+                {
+                    "name": "COMPANY",
+                    "type": "String"
+                },
+                {
+                    "name": "employeeCount",
+                    "type": "int"
+                }
+            ],
             "constructors": [
                 {
                     "name": "Employee",
@@ -61,7 +78,16 @@
         },
         {
             "name": "Department",
-            "fields": [],
+            "fields": [
+                {
+                    "name": "departmentName",
+                    "type": "String"
+                },
+                {
+                    "name": "employees",
+                    "type": "List<Employee>"
+                }
+            ],
             "constructors": [
                 {
                     "name": "Department",
@@ -101,7 +127,12 @@
         },
         {
             "name": "Main",
-            "fields": [],
+            "fields": [
+                {
+                    "name": "counter",
+                    "type": "int"
+                }
+            ],
             "constructors": [],
             "methods": [
                 {
@@ -113,7 +144,24 @@
                             "type": "String[]"
                         }
                     ],
-                    "localVariables": []
+                    "localVariables": [
+                        {
+                            "name": "e1",
+                            "type": "Employee"
+                        },
+                        {
+                            "name": "e2",
+                            "type": "Employee"
+                        },
+                        {
+                            "name": "dept",
+                            "type": "Department"
+                        },
+                        {
+                            "name": "sum",
+                            "type": "int"
+                        }
+                    ]
                 },
                 {
                     "name": "greet",

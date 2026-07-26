@@ -1,4 +1,5 @@
 from atlas.collectors.parameter_collector import  parameter_collector as pc
+from atlas.collectors.variable_collector import  variable_collector as vc
 class method_collector:
     def visit_method_declaration(self,current_class,source,node):
 
@@ -16,10 +17,17 @@ class method_collector:
         }
         current_class["methods"].append(method)
         param = node.child_by_field_name("parameters")
+        var = node.child_by_field_name("body")
         parameter_collector = pc()
+        variable_collector = vc()
         if param:
             for child in param.named_children:
                 #print(child)
                 if child.type == "formal_parameter":
                     parameter_collector.visit_parameter_declaration(method,source,child)
+        if var:
+            for child in var.named_children: 
+                if child.type == "local_variable_declaration":
+                    variable_collector.visit_variable_declaration(method,source,child)        
+
             
