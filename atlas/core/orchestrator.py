@@ -18,15 +18,30 @@ class AnalysisPipeline:
         filter=FilterPipeline()
         java_files = filter.filterFiles(all_files,".java")  # later will add other exts
 
+        project = {
+            "files": []
+     }
         # Step 2: Parse files
         print("Parsing files...")
         for each_file in java_files:
             parser = JavaParser()
             tree,source,path = parser.parse(each_file)
-            
+            visitor = JavaVisitor(tree,source,path)
+            result = visitor.visit(tree.root_node)
+            file = {
+             "path": str(path),
+             "package": result["package"],
+             "imports": result["imports"],
+             "classes": result["classes"]
+            }
+
+            project["files"].append(file)
+
+           
             # You can process the tree as needed, e.g., extract symbols, etc.
-        visitor = JavaVisitor(tree,source,path)
-        result = visitor.visit(tree.root_node)
+        
+        
+        
 
         # Step 3: Collect symbols
         print("Collecting symbols...")
@@ -36,6 +51,6 @@ class AnalysisPipeline:
 
         # Step 5: Export JSON
         print("Exporting JSON...")
-        JsonExporter.export(result, "output.json")
+        JsonExporter.export(project, "output.json")
 
         print("Analysis completed.")
