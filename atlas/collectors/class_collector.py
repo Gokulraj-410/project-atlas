@@ -1,5 +1,6 @@
 from atlas.collectors.method_collector import method_collector as mc
 from atlas.collectors.constructor_collector import constructor_collector as cc
+from atlas.collectors.field_collector import field_collector as fc
 class class_collector:
     def visit_class_declaration(self,source,node):
 
@@ -17,12 +18,18 @@ class class_collector:
         self.result["classes"].append(cls)
         method_collector = mc()
         constructor_collector = cc()
+        field_collector = fc()
         body = node.child_by_field_name("body")
         if body:
             for child in body.named_children:
+             # print(child)
               if child.type == "method_declaration":
                   method_collector.visit_method_declaration(cls,source,child)
               if child.type == "constructor_declaration":
                     constructor_collector.visit_constructor_declaration(cls,source,child)
+              if child.type == "field_declaration":
+                    field_collector.visit_field_declaration(cls,source,child)
+                  
+                 
 
        
