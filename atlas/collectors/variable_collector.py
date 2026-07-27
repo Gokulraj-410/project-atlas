@@ -14,7 +14,17 @@ class  variable_collector:
                     "name": source[
                         name_node.start_byte:name_node.end_byte
                     ].decode("utf-8"),
-                    "type": variable_type
+                    "type": variable_type,
+                    "location":{
+                    "start": {
+                        "line": node.start_point[0] + 1,
+                        "column": node.start_point[1]
+                    },
+                    "end": {
+                        "line": node.end_point[0] + 1,
+                        "column": node.end_point[1]
+                    }
+                    },
                 }
 
                 current_method["localVariables"].append(variable)

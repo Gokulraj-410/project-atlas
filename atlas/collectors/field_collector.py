@@ -44,6 +44,16 @@ class field_collector:
                 field = {
                     "name": field_name,
                     "type": field_type,
+                    "location":{
+                    "start": {
+                        "line": node.start_point[0] + 1,
+                        "column": node.start_point[1]
+                    },
+                    "end": {
+                        "line": node.end_point[0] + 1,
+                        "column": node.end_point[1]
+                    }
+                    },
                     "visibility": is_visible,
                     "static": is_static,
                     "final": is_final

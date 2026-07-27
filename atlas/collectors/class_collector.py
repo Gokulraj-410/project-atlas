@@ -6,7 +6,7 @@ from atlas.collectors.field_collector import field_collector as fc
 class class_collector:
 
     def visit_class_declaration(self, source, node):
-        
+
         name_node = node.child_by_field_name("name")
         class_name = source[
             name_node.start_byte:name_node.end_byte
@@ -43,6 +43,16 @@ class class_collector:
             "visibility": visibility,
             "static": is_static,
             "final": is_final,
+            "location":{
+                "start": {
+                    "line": node.start_point[0] + 1,
+                    "column": node.start_point[1]
+                },
+                "end": {
+                    "line": node.end_point[0] + 1,
+                    "column": node.end_point[1]
+                }
+            },
             "fields": [],
             "constructors": [],
             "methods": []

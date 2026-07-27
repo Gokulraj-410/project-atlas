@@ -9,7 +9,17 @@ class parameter_collector:
         
         param ={
             "name":param_name,
-            "type":type_name
+            "type":type_name,
+            "location":{
+            "start": {
+                "line": node.start_point[0] + 1,
+                "column": node.start_point[1]
+            },
+            "end": {
+                "line": node.end_point[0] + 1,
+                "column": node.end_point[1]
+            }
+            },
         }
 
         current_method["parameters"].append(param)
