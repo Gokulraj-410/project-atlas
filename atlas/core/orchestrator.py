@@ -1,7 +1,7 @@
 from atlas.discovery.finder import Finder
 from atlas.discovery.filter import FilterPipeline
 from atlas.parsers.java.parser import JavaParser
-#from atlas.models.syntax_tree import SyntaxTree
+from atlas.models.project import Project
 from atlas.visitor.java.visitor import JavaVisitor
 from atlas.exporters.json_exporter import JsonExporter
 
@@ -18,9 +18,7 @@ class AnalysisPipeline:
         filter=FilterPipeline()
         java_files = filter.filterFiles(all_files,".java")  # later will add other exts
 
-        project = {
-            "files": []
-     }
+        project = Project()
         # Step 2: Parse files
         print("Parsing files...")
         for each_file in java_files:
@@ -28,15 +26,7 @@ class AnalysisPipeline:
             tree,source,path = parser.parse(each_file)
             visitor = JavaVisitor(tree,source,path)
             result = visitor.visit(tree.root_node)
-            file = {
-             "path": str(path),
-             "package": result["package"],
-             "imports": result["imports"],
-             "classes": result["classes"],
-             "errors": result["errors"]
-            }
-
-            project["files"].append(file)
+            project.files.append(result)
 
            
             # You can process the tree as needed, e.g., extract symbols, etc.
@@ -52,6 +42,6 @@ class AnalysisPipeline:
 
         # Step 5: Export JSON
         print("Exporting JSON...")
-        JsonExporter.export(project, "output.json")
+        JsonExporter.export(project, "atlas.json")
 
         print("Analysis completed.")

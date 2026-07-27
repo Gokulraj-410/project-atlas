@@ -1,5 +1,4 @@
 from atlas.parsers.base_parser import BaseParser
-from atlas.models.syntax_tree import SyntaxTree
 from tree_sitter import Parser,Language
 import tree_sitter_java
 from pathlib import Path

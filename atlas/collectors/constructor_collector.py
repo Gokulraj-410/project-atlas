@@ -1,4 +1,7 @@
 from atlas.collectors.parameter_collector import  parameter_collector as pc
+from atlas.models.constructor_model import ConstructorModel
+from atlas.models.modifier import Modifier
+from atlas.models.source_location import SourceLocation, Position
 class constructor_collector:
     def visit_constructor_declaration(self,current_class,source,node):
         name_node = node.child_by_field_name("name")
@@ -28,24 +31,27 @@ class constructor_collector:
             is_static = "static" in modifiers
             is_final = "final" in modifiers        
 
-        constructor ={
-            "name":method_name,
-            "parameters":[],
-            "location":{
-            "start": {
-                "line": node.start_point[0] + 1,
-                "column": node.start_point[1]
-            },
-            "end": {
-                "line": node.end_point[0] + 1,
-                "column": node.end_point[1]
-            }
-            },
-            "visibility":is_visible,
-            "static":is_static,
-            "final":is_final
-        }
-        current_class["constructors"].append(constructor)
+        modifier = Modifier(
+            visibility=is_visible,
+            static=is_static,
+            final=is_final
+        )
+        constructor = ConstructorModel(
+            name=method_name,
+            modifier=modifier,
+            location=SourceLocation(
+            start=Position(
+                line=name_node.start_point[0] + 1,
+                column=name_node.start_point[1]
+            ),
+            end=Position(
+                line=name_node.end_point[0] + 1,
+                column=name_node.end_point[1]
+            )
+            ),
+            parameters=[]
+        )
+        current_class.constructors.append(constructor)
         param = node.child_by_field_name("parameters")
         parameter_collector = pc()
         if param:

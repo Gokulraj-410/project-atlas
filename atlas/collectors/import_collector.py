@@ -5,7 +5,7 @@ class import_collector:
         import_name = source[scoped_node.start_byte:scoped_node.end_byte].decode("utf-8")
 
     
-        self.result["imports"].append(import_name)
+        self.result.imports.append(import_name)
 
     
    

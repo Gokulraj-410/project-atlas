@@ -1,5 +1,8 @@
 from atlas.collectors.parameter_collector import  parameter_collector as pc
 from atlas.collectors.variable_collector import  variable_collector as vc
+from atlas.models.method_model import MethodModel
+from atlas.models.modifier import Modifier
+from atlas.models.source_location import SourceLocation, Position
 class method_collector:
     def visit_method_declaration(self,current_class,source,node):
 
@@ -31,26 +34,31 @@ class method_collector:
             is_static = "static" in modifiers
             is_final = "final" in modifiers  
         
-        method = {
-        "name": method_name,
-        "returnType": return_type,
-        "location":{
-        "start": {
-            "line": node.start_point[0] + 1,
-            "column": node.start_point[1]
-        },
-        "end": {
-            "line": node.end_point[0] + 1,
-            "column": node.end_point[1]
-        }
-        },
-        "visibility": is_visible,
-        "static": is_static,
-        "final": is_final,
-        "parameters": [],
-        "localVariables": []
-        }
-        current_class["methods"].append(method)
+        modifier = Modifier(
+            visibility=is_visible,
+            static=is_static,
+            final=is_final
+        )
+        method = MethodModel(
+            name=method_name,
+            return_type=return_type,
+            modifier=modifier,
+            location=SourceLocation(
+                start=Position(
+                    line=node.start_point[0] + 1,
+                    column=node.start_point[1]
+                ),
+                end=Position(
+                    line=node.end_point[0] + 1,
+                    column=node.end_point[1]
+                )
+            ),
+            parameters=[],
+            local_variables=[]
+        )
+
+        
+        current_class.methods.append(method)
         param = node.child_by_field_name("parameters")
         var = node.child_by_field_name("body")
         parameter_collector = pc()

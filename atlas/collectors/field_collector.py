@@ -1,3 +1,6 @@
+from atlas.models.field_model import FieldModel
+from atlas.models.modifier import Modifier
+from atlas.models.source_location import SourceLocation, Position
 class field_collector:
 
     def visit_field_declaration(self, current_class, source, node):
@@ -39,24 +42,27 @@ class field_collector:
                         is_visible = "protected"
 
                     is_static = "static" in modifiers
-                    is_final = "final" in modifiers    
+                    is_final = "final" in modifiers
 
-                field = {
-                    "name": field_name,
-                    "type": field_type,
-                    "location":{
-                    "start": {
-                        "line": node.start_point[0] + 1,
-                        "column": node.start_point[1]
-                    },
-                    "end": {
-                        "line": node.end_point[0] + 1,
-                        "column": node.end_point[1]
-                    }
-                    },
-                    "visibility": is_visible,
-                    "static": is_static,
-                    "final": is_final
-                }
+                    modifier = Modifier(
+                        visibility=is_visible,
+                        static=is_static,
+                        final=is_final
+                    )
+                    field = FieldModel(
+                    name=field_name,
+                    type=field_type,
+                    modifier=modifier,
+                    location=SourceLocation(
+                        start=Position(
+                            line=name_node.start_point[0] + 1,
+                            column=name_node.start_point[1]
+                        ),
+                        end=Position(
+                            line=name_node.end_point[0] + 1,
+                            column=name_node.end_point[1]
+                        )
+                    ))    
 
-                current_class["fields"].append(field)
+
+                current_class.fields.append(field)

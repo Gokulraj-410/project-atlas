@@ -1,6 +1,9 @@
 from atlas.collectors.method_collector import method_collector as mc
 from atlas.collectors.constructor_collector import constructor_collector as cc
 from atlas.collectors.field_collector import field_collector as fc
+from atlas.models.class_model import ClassModel
+from atlas.models.modifier import Modifier
+from atlas.models.source_location import SourceLocation, Position
 
 
 class class_collector:
@@ -38,27 +41,28 @@ class class_collector:
 
             is_static = "static" in modifiers
             is_final = "final" in modifiers
-        cls = {
-            "name": class_name,
-            "visibility": visibility,
-            "static": is_static,
-            "final": is_final,
-            "location":{
-                "start": {
-                    "line": node.start_point[0] + 1,
-                    "column": node.start_point[1]
-                },
-                "end": {
-                    "line": node.end_point[0] + 1,
-                    "column": node.end_point[1]
-                }
-            },
-            "fields": [],
-            "constructors": [],
-            "methods": []
-        }
+        modifier = Modifier(
+        visibility=visibility,
+        static=is_static,
+        final=is_final
+        )
 
-        self.result["classes"].append(cls)
+        cls = ClassModel(
+            name=class_name,
+            modifier=modifier,
+            location=SourceLocation(
+            start=Position(
+                line=name_node.start_point[0] + 1,
+                column=name_node.start_point[1]
+            ),
+            end=Position(
+                line=name_node.end_point[0] + 1,
+                column=name_node.end_point[1]
+            )
+        )
+        )
+
+        self.result.classes.append(cls)
         method_collector = mc()
         constructor_collector = cc()
         field_collector = fc()
