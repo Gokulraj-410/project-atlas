@@ -32,7 +32,8 @@ class AnalysisPipeline:
              "path": str(path),
              "package": result["package"],
              "imports": result["imports"],
-             "classes": result["classes"]
+             "classes": result["classes"],
+             "errors": result["errors"]
             }
 
             project["files"].append(file)

@@ -3,10 +3,37 @@ class constructor_collector:
     def visit_constructor_declaration(self,current_class,source,node):
         name_node = node.child_by_field_name("name")
         method_name = source[name_node.start_byte:name_node.end_byte].decode("utf-8")
+        is_visible = "default"
+        is_static = False
+        is_final = False
+ 
+        modifiers_node = None
+        for child in node.children:
+            if child.type == "modifiers":
+                modifiers_node = child
+                break
+
+        if modifiers_node is not None:
+            modifiers = source[
+            modifiers_node.start_byte:modifiers_node.end_byte
+            ].decode("utf-8").split()
+
+            if "public" in modifiers:
+                is_visible = "public"
+            elif "private" in modifiers:
+                is_visible = "private"
+            elif "protected" in modifiers:
+                is_visible = "protected"
+
+            is_static = "static" in modifiers
+            is_final = "final" in modifiers        
 
         constructor ={
             "name":method_name,
-            "parameters":[]
+            "parameters":[],
+            "visibility":is_visible,
+            "static":is_static,
+            "final":is_final
         }
         current_class["constructors"].append(constructor)
         param = node.child_by_field_name("parameters")
