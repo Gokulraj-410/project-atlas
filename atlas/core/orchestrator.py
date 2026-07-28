@@ -4,16 +4,17 @@ from atlas.parsers.java.parser import JavaParser
 from atlas.models.project import Project
 from atlas.visitor.java.visitor import JavaVisitor
 from atlas.exporters.json_exporter import JsonExporter
+from atlas.database.connection import SessionLocal
+#from atlas.database.importer import AtlasImporter
 
 class AnalysisPipeline:
     def analyze(self, path: str):
         print(f"Starting analysis of: {path}")
 
-        # Step 1.1: Discover files
         print("Discovering files...")
         finder = Finder(path)
         all_files = finder.discoverFiles()
-        # Step 1.2: Filter files
+      
         print("Filtering files...")
         filter=FilterPipeline()
         java_files = filter.filterFiles(all_files,".java")  # later will add other exts
@@ -28,20 +29,17 @@ class AnalysisPipeline:
             result = visitor.visit(tree.root_node)
             project.files.append(result)
 
-           
-            # You can process the tree as needed, e.g., extract symbols, etc.
-        
-        
-        
+        print("Exporting JSON...")
+        JsonExporter.export(project, "atlas.json")
+            
 
-        # Step 3: Collect symbols
+       
         print("Collecting symbols...")
+        
 
         # Step 4: Store results
         print("Storing results...")
 
-        # Step 5: Export JSON
-        print("Exporting JSON...")
-        JsonExporter.export(project, "atlas.json")
-
+      
+        
         print("Analysis completed.")
