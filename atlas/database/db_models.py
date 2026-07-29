@@ -212,7 +212,6 @@ class Parameter(Base):
     owner_type = Column(String(20), nullable=False)
     owner_id = Column(Integer, nullable=False)
 
-    position = Column(Integer, nullable=False)
 
     name = Column(String(255), nullable=False)
     type = Column(String(255))

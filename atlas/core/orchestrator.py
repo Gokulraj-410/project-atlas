@@ -5,7 +5,7 @@ from atlas.models.project import Project
 from atlas.visitor.java.visitor import JavaVisitor
 from atlas.exporters.json_exporter import JsonExporter
 from atlas.database.connection import SessionLocal
-#from atlas.database.importer import AtlasImporter
+from atlas.database.importer import AtlasImporter
 
 class AnalysisPipeline:
     def analyze(self, path: str):
@@ -31,6 +31,10 @@ class AnalysisPipeline:
 
         print("Exporting JSON...")
         JsonExporter.export(project, "atlas.json")
+
+        print("Importing into database...")
+        importer = AtlasImporter()
+        importer.import_project(project)
             
 
        
@@ -39,6 +43,8 @@ class AnalysisPipeline:
 
         # Step 4: Store results
         print("Storing results...")
+
+        
 
       
         
