@@ -1,0 +1,17 @@
+from enum import Enum
+
+
+class RelationshipType(str, Enum):
+    DECLARES = "DECLARES"
+    HAS_FIELD = "HAS_FIELD"
+    HAS_PARAMETER = "HAS_PARAMETER"
+
+    CREATES = "CREATES"
+    CALLS = "CALLS"
+    REFERENCES = "REFERENCES"
+    RETURNS = "RETURNS"
+
+    EXTENDS = "EXTENDS"
+    IMPLEMENTS = "IMPLEMENTS"
+    IMPORTS = "IMPORTS"
+    ANNOTATED_WITH = "ANNOTATED_WITH"
